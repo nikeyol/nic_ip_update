@@ -1,14 +1,19 @@
 # Static IP configuration
 IP_ADDRESS="192.168.1.50"
-NETMASK="24"
+NETMASK="255.255.255.0"
 GATEWAY="192.168.1.1"
+DNS="8.8.8.8 192.168.1.1"
 
 case "$1" in
     start)
         echo "Setting static IP: $IP_ADDRESS/$NETMASK"
-        ip addr add $IP_ADDRESS/$NETMASK dev eth0
-        ip route add default via $GATEWAY
-        ifup eth0
+        echo "
+        auto eth0
+        iface eth0 inet static
+              address $IP_ADDRESS
+              netmask $NETMASK
+              gateway $GATEWAY
+              dns-nameservers $DNS" | sudo tee /etc/interface
         ;;
     stop)
         # Add any cleanup commands here if needed
