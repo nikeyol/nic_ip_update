@@ -13,7 +13,7 @@ case "$1" in
               address $IP_ADDRESS
               netmask $NETMASK
               gateway $GATEWAY
-              dns-nameservers $DNS" | sudo tee /etc/interface
+              dns-nameservers $DNS" | sudo tee /etc/network/interfaces
         sudo ifup eth0
         ;;
     stop)
