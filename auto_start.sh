@@ -14,6 +14,7 @@ case "$1" in
               netmask $NETMASK
               gateway $GATEWAY
               dns-nameservers $DNS" | sudo tee /etc/interface
+        sudo ifup eth0
         ;;
     stop)
         # Add any cleanup commands here if needed
